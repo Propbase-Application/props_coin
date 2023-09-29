@@ -22,7 +22,7 @@ address admin {
 
       assert!(account_addr == @admin, E_NOT_ADMIN);
 
-      let (burn_cap, freeze_cap, mint_cap) = coin::initialize<PropCoin>(account, name, symbol, decimals, true);
+      let (burn_cap, freeze_cap, mint_cap) = coin::initialize<PropCoin>(account, name, symbol, decimals, false);
 
       // Register account for the coin
       coin::register<PropCoin>(account);
