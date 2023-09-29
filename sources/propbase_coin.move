@@ -1,40 +1,50 @@
-address admin {
+module propbase::propbase_coin {
+  use std::signer;
+  use std::string::{Self, String};
+  use aptos_framework::resource_account;
+  use aptos_framework::account::{Self, SignerCapability, create_signer_with_capability};
 
-  module propbase_coin_14 {
-    use std::signer;
-    use std::string::{Self, String};
+  use aptos_framework::coin;
 
-    use aptos_framework::coin;
+  struct PropCoin {}
 
-    struct PropCoin {}
+  struct Config has key {
+    admin: address,
+    signer_cap: SignerCapability
+  }
 
-    const E_NOT_ADMIN: u64 = 0;
+  const E_NOT_ADMIN: u64 = 0;
 
-    /// Initialize the PropCoin
-    public entry fun initialize(
-        account: &signer,
-        name: String,
-        symbol: String,
-        decimals: u8,
-        supply: u64
-    ) {
-      let account_addr = signer::address_of(account);
+  fun init_module(resource_account: &signer) {
+    let resource_signer_cap = resource_account::retrieve_resource_account_cap(resource_account, @source_addr);
+      move_to(resource_account, Config {
+        admin: @source_addr,
+        signer_cap: resource_signer_cap
+    });
+  }
 
-      assert!(account_addr == @admin, E_NOT_ADMIN);
+  public entry fun initialize(
+    account: &signer,
+    name: String,
+    symbol: String,
+    decimals: u8,
+    supply: u64
+  ) acquires Config {
+    let contract_config = borrow_global<Config>(@propbase);
+    let account_addr = signer::address_of(account);
 
-      let (burn_cap, freeze_cap, mint_cap) = coin::initialize<PropCoin>(account, name, symbol, decimals, true);
+    assert!(account_addr == contract_config.admin, E_NOT_ADMIN);
 
-      // Register account for the coin
-      coin::register<PropCoin>(account);
+    let resource_signer = create_signer_with_capability(&contract_config.signer_cap);
+    let (burn_cap, freeze_cap, mint_cap) = coin::initialize<PropCoin>(&resource_signer, name, symbol, decimals, false);
 
-      // Mint the supply
-      let coins_minted = coin::mint<PropCoin>(supply, &mint_cap);
-      coin::deposit(account_addr, coins_minted);
+    coin::register<PropCoin>(account);
 
-      // Destroy the all capabilities
-      coin::destroy_mint_cap<PropCoin>(mint_cap);
-      coin::destroy_burn_cap<PropCoin>(burn_cap);
-      coin::destroy_freeze_cap<PropCoin>(freeze_cap);
-    }
+    let coins_minted = coin::mint<PropCoin>(supply, &mint_cap);
+    coin::deposit(account_addr, coins_minted);
+
+    coin::destroy_mint_cap<PropCoin>(mint_cap);
+    coin::destroy_burn_cap<PropCoin>(burn_cap);
+    coin::destroy_freeze_cap<PropCoin>(freeze_cap);
   }
 }
