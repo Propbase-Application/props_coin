@@ -32,13 +32,21 @@ aptos init --profile nft-receiver
 ## Compile
 
 ```
-aptos move compile --named-addresses propbase_coin_4=0x1cac17ac868932548f4a85fe3e853a1023a57b7f275d4247e1cded85d40b3c3d
+
+aptos move compile --named-addresses MoonCoin=0x1cac17ac868932548f4a85fe3e853a1023a57b7f275d4247e1cded85d40b3c3d --save-metadata
+
+
+aptos move run --function-id 0x1cac17ac868932548f4a85fe3e853a1023a57b7f275d4247e1cded85d40b3c3d::mooncoin::initialize --args string:Propbase string:PROPS u8:8 u64:120000000000000000 --profile admin3
 ```
+
+https://explorer.aptoslabs.com/account/0x1/modules/run/managed_coin/register?network=testnet
+https://explorer.aptoslabs.com/account/0x1/modules/run/managed_coin/register?network=testnet
+0x1cac17ac868932548f4a85fe3e853a1023a57b7f275d4247e1cded85d40b3c3d::moon_coin::MoonCoin
 
 ## Publish
 
 ```
-aptos move publish --named-addresses propbase_coin_4=0x1cac17ac868932548f4a85fe3e853a1023a57b7f275d4247e1cded85d40b3c3d --profile admin3
+aptos move publish --named-addresses MoonCoin=0x1cac17ac868932548f4a85fe3e853a1023a57b7f275d4247e1cded85d40b3c3d --profile admin3
 ```
 
 ## Initialize
@@ -76,3 +84,7 @@ https://explorer.aptoslabs.com/account/0x1/modules/run/managed_coin/mint?network
 800000000000000 = 8000000 PROPS -> 8 million
 
 200000000 Octas = 2 PROPS
+
+0x1cac17ac868932548f4a85fe3e853a1023a57b7f275d4247e1cded85d40b3c3d::moon_coin::MoonCoin
+
+https://explorer.aptoslabs.com/account/0x1/modules/run/managed_coin/mint?network=testnet
