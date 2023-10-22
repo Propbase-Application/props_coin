@@ -1,16 +1,16 @@
 address admin {
 
-  module propbase_coin_7 {
+  module propbase_coin_10 {
     use std::signer;
     use std::string::{Self, String};
 
     use aptos_framework::coin;
 
-    struct PropCoin {}
+    struct PROPS {}
 
     const E_NOT_ADMIN: u64 = 0;
 
-    /// Initialize the PropCoin
+    /// Initialize the PROPS
     public entry fun initialize(
         account: &signer,
         name: String,
@@ -22,19 +22,19 @@ address admin {
 
       assert!(account_addr == @admin, E_NOT_ADMIN);
 
-      let (burn_cap, freeze_cap, mint_cap) = coin::initialize<PropCoin>(account, name, symbol, decimals, false);
+      let (burn_cap, freeze_cap, mint_cap) = coin::initialize<PROPS>(account, name, symbol, decimals, false);
 
       // Register account for the coin
-      coin::register<PropCoin>(account);
+      coin::register<PROPS>(account);
 
       // Mint the supply
-      let coins_minted = coin::mint<PropCoin>(supply, &mint_cap);
+      let coins_minted = coin::mint<PROPS>(supply, &mint_cap);
       coin::deposit(account_addr, coins_minted);
 
       // Destroy the all capabilities
-      coin::destroy_mint_cap<PropCoin>(mint_cap);
-      coin::destroy_burn_cap<PropCoin>(burn_cap);
-      coin::destroy_freeze_cap<PropCoin>(freeze_cap);
+      coin::destroy_mint_cap<PROPS>(mint_cap);
+      coin::destroy_burn_cap<PROPS>(burn_cap);
+      coin::destroy_freeze_cap<PROPS>(freeze_cap);
     }
   }
 }
