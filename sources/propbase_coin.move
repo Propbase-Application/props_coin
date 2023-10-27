@@ -2,7 +2,7 @@ address admin {
 
   module propbase_coin {
     use std::signer;
-    use std::string::{Self, String};
+    use std::string::{String};
 
     use aptos_framework::coin;
 
