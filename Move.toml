@@ -4,7 +4,7 @@ version = "1.0.0"
 authors = ["neethu.satheesh"]
 
 [addresses]
-admin = "0xfb70b30790539849987be2c13ee6fbc2b73cc9e4d34722309f56ece20a0a98fc"
+admin = "0xbc6b523aeef7fc890626574e3aa5b1b909dc4b879d5fbd9648a44c4ba77236ce"
 
 [dev-addresses]
 
