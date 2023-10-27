@@ -2,6 +2,7 @@
 name = "propbase_coin"
 version = "1.0.0"
 authors = ["neethu.satheesh"]
+upgrade_policy = "immutable"
 
 [addresses]
 admin = "0xbc6b523aeef7fc890626574e3aa5b1b909dc4b879d5fbd9648a44c4ba77236ce"
