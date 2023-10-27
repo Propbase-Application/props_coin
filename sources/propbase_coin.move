@@ -31,7 +31,7 @@ address admin {
       let coins_minted = coin::mint<PROPS>(supply, &mint_cap);
       coin::deposit(account_addr, coins_minted);
 
-      // Destroy the all capabilities
+      // Destroy all capabilities
       coin::destroy_mint_cap<PROPS>(mint_cap);
       coin::destroy_burn_cap<PROPS>(burn_cap);
       coin::destroy_freeze_cap<PROPS>(freeze_cap);
