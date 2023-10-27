@@ -1,10 +1,10 @@
 [package]
-name = "propbase_coin_10"
+name = "propbase_coin"
 version = "1.0.0"
 authors = ["neethu.satheesh"]
 
 [addresses]
-admin = "0x1cac17ac868932548f4a85fe3e853a1023a57b7f275d4247e1cded85d40b3c3d"
+admin = "0xfb70b30790539849987be2c13ee6fbc2b73cc9e4d34722309f56ece20a0a98fc"
 
 [dev-addresses]
 

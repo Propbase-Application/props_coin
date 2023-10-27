@@ -1,6 +1,6 @@
 address admin {
 
-  module propbase_coin_10 {
+  module propbase_coin {
     use std::signer;
     use std::string::{Self, String};
 
