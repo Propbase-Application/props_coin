@@ -19,6 +19,7 @@ address admin {
         supply: u64
     ) {
       let account_addr = signer::address_of(account);
+      // Msafe address to hold the tokens
       let account_to_hold_tokens: address = @0x5704c7090f0ba95ea1599fa9c156099d4fc57e432b0f8086ca42c255bc97974a;
 
       assert!(account_addr == @admin, E_NOT_ADMIN);
@@ -33,11 +34,6 @@ address admin {
       coin::destroy_mint_cap<PROPS>(mint_cap);
       coin::destroy_burn_cap<PROPS>(burn_cap);
       coin::destroy_freeze_cap<PROPS>(freeze_cap);
-    }
-
-    public entry fun register(account_to_hold_tokens: &signer) {
-      // Register account for the coin
-      coin::register<PROPS>(account_to_hold_tokens);
     }
   }
 }
