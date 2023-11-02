@@ -5,7 +5,7 @@ authors = ["neethu.satheesh"]
 upgrade_policy = "immutable"
 
 [addresses]
-admin = "0xaada000490412ecbd319f494b9dbfe7a745605aba8a4c8d09b21e4ab1c772862"
+admin = "0xadminaddress"
 
 [dev-addresses]
 

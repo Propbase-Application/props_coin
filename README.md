@@ -27,7 +27,7 @@ MSafe Address in contract
 
 ````
 
-aptos move compile --named-addresses propbase_coin=0xaada000490412ecbd319f494b9dbfe7a745605aba8a4c8d09b21e4ab1c772862
+aptos move compile --named-addresses propbase_coin=0xadminaddress
 
 ```
 
@@ -35,7 +35,7 @@ aptos move compile --named-addresses propbase_coin=0xaada000490412ecbd319f494b9d
 
 ```
 
-aptos move publish --named-addresses propbase_coin=0xaada000490412ecbd319f494b9dbfe7a745605aba8a4c8d09b21e4ab1c772862 --profile admin8 --included-artifacts none
+aptos move publish --named-addresses propbase_coin=0xadminaddress --profile admin8 --included-artifacts none
 
 ```
 
@@ -43,7 +43,7 @@ CoinType
 
 ```
 
-0xaada000490412ecbd319f494b9dbfe7a745605aba8a4c8d09b21e4ab1c772862::propbase_coin::PROPS
+0xadminaddress::propbase_coin::PROPS
 
 ```
 
@@ -60,10 +60,11 @@ https://explorer.aptoslabs.com/account/0x1/modules/run/managed_coin/register?net
 Provide the token name, token symbol and supply in octas
 
 1.2 billion = 1200000000 PROPS = 120000000000000000 Octas
+60 million = 60000000 PROPS = 6000000000000000
 
 ```
 
-aptos move run --function-id 0xaada000490412ecbd319f494b9dbfe7a745605aba8a4c8d09b21e4ab1c772862::propbase_coin::initialize --args string:Propbase string:PROPS u8:8 u64:120000000000000000 --profile admin8
+aptos move run --function-id 0xadminaddress::propbase_coin::initialize --args string:Propbase string:PROPS u8:8 u64:120000000000000000 --profile admin8
 
 ```
 
